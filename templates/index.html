@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora de Calorías y Ejercicios</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="platos">Selecciona los platos bolivianos:</label>
+                <div class="checkbox-group">
+                    {% for plato in platos %}
+                        <label class="custom-checkbox">
+                            <input type="checkbox" name="platos" value="{{ plato }}">
+                            <span class="checkmark"></span>
+                            {{ plato }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+            <button type="submit" class="btn">Calcular</button>
+        </form>
+        {% if calorias_totales is defined %}
+            <div class="result">
+                <p>Calorías totales: {{ calorias_totales }}</p>
+                <p>Ejercicios para quemar calorías:</p>
+                <ul class="exercise-list">
+                    {% for ejercicio in ejercicios_para_quemar_calorias %}
+                        <li class="exercise-box">{{ ejercicio }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
